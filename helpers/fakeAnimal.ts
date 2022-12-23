@@ -1,11 +1,20 @@
-import type { GenderType } from '@faker-js/faker'
-import { faker } from '@faker-js/faker'
+import type { GenderType } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
-import type { Animal, Fruit, Gender } from '../types'
+import type { Animal, Fruit, Gender } from '../types';
 
+/**
+ * Creates an instance of type "Animal" with random properties
+ *
+ * @returns Instance of type Animal
+ */
 export const fakeAnimal = (): Animal => {
-  const gender = faker.helpers.arrayElement(['male', 'female']) as Gender
-  const favouriteFruit = faker.helpers.arrayElement(['banana', 'apple', 'cherry']) as Fruit
+  const gender = faker.helpers.arrayElement(['male', 'female']) as Gender;
+  const favouriteFruit = faker.helpers.arrayElement([
+    'banana',
+    'apple',
+    'cherry',
+  ]) as Fruit;
 
   return {
     id: faker.datatype.uuid(),
@@ -24,5 +33,5 @@ export const fakeAnimal = (): Animal => {
     }),
     gender,
     favouriteFruit,
-  }
-}
+  };
+};
