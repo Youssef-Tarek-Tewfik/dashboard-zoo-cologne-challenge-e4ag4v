@@ -1,3 +1,5 @@
+import type { Animal, Fruit, Gender } from '../types';
+
 /**
  * Calculates the difference in years from the given date rounded.
  * Value returned is 1 in case the rounding reduces it to 0.
@@ -39,3 +41,69 @@ export const compareByProperty = (a: any, b: any, property: any, reverse = false
 
   return reverse? val * -1: val;
 };
+
+/**
+ * Calculates the amount of kilograms of food needed for a given animal for the following month from the current date.
+ * 
+ * @param animal The Animal instance
+ * @returns A number representing the amount of food in kilograms
+ */
+ export const nextMonthFoodSupply = (animal: Animal): number => {
+  const date = new Date();
+  let days = 0;
+
+  // No need to handle incrementing the year, January is always 31 days
+  if (date.getMonth() === 11) {
+    days = 31;
+  }
+  else {
+    days = daysInMonth(date.getMonth() + 2, date.getFullYear()); // +1 because its 1 based, +1 for next month
+  }
+  return dailyFoodSupply(animal) * days;
+};
+
+/**
+ * Calculates the amount of food in kilograms for a given Animal instance.
+ * 
+ * @param animal The Animal instance
+ * @returns A number representing the amount of food in kilograms
+ */
+const dailyFoodSupply = (animal: Animal): number => {
+  // Simple base case, no need to delay this check
+  if (animal.species == "fish") {
+    return 0;
+  }
+
+  let amount = (animal.height + animal.weight) / 250;
+  const age = calculateAgeInYears(new Date(animal.birthdate));
+  if (age >= 20) {
+    amount /= 2;
+  }
+  else if (age < 2) {
+    amount *= 2;
+  }
+  if (animal.favouriteFruit == "cherry") {
+    amount += 28;
+  }
+  if (animal.gender == "male") {
+    amount *= 1.2;
+  }
+  return amount;
+};
+
+/**
+ * Calculates the number of days in a given month of a given year, taking leap years into account.
+ * 
+ * @param month 1 <= month <= 12 (not zero based)
+ * @param year The calendar year (e.g 2022)
+ * @returns The number of days in that month
+ */
+const daysInMonth = (month: number, year: number): number => {
+  if (month == 2) {
+    return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) ? 29 : 28;
+  }
+  if (month <= 7) {
+    return (month & 1) ? 31 : 30;
+  }
+  return (month & 1) ? 30 : 31;
+}

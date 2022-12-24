@@ -37,7 +37,6 @@ In a first step you should inspect the health of the project and report on every
 Please take stock fo the page using developer tools, your instincts, ... and write down below what you find.
 
 // Your solution
-
 Inspecting the Networks tab in the dev tools shows that multiple fetch requests received a 503 "Service Unavailable" response code.
 
 The terminal and the console tab in the dev tools are showing another code 500 error stating that "ANlMALS" is not defined.
@@ -52,7 +51,6 @@ Now that we know that is broken, let's try to get things running again, step by 
 Zookeepers reported that the error sometimes changes when reloading the page after the initial start.
 
 // Your solution
-
 So after fixing the typo in "animals.get.ts" to export the animal array defined correctly, there was another error
 
 "alert" was not defined. This error was inconsistent as mentioned due to the asynchronous behavior of the function call which I assume happens because the call is made before the DOM fully loads. Using a simple "onMounted" function fixes this issue (or just simply removing the "vandalism").
@@ -85,12 +83,20 @@ The zookeepers report that the table is incomplete and different than usually. M
 Please fix the two above problems and outline what was necessarry to do so.
 
 // Your solution
+- For the name, I just added new table header and data tags in the third position of each, and used the existing name property 
+
+- I implemented a new helper function "compareByProperty" which acts as a comparator depending on the property passed dowwn as an argument, so I made it so that it is sorted by name initially and changes if a column header is clicked 
+
+- I just used the existing helper function "calculateAgeInYears" while making sure to pass down the correct type
 
 ### Task 6: UI Feature 1
 
 The zookeepers want to be able to see all details of an animal. Please create such a view that allows them to do so, outline anything about your process while adding the view below. The zookeepers didn't have time for more information, sorry. They'll surely be glad to criticize the first version intensly though and will want to know why you went for the approach you chose.
 
 // Your solution
+For now, the quickest solution would be to just add extra columns for the additional information. Obviously this won't scale very well if we have a lot of data per entry, but until the zookeepers specify a certain requirement, the simple solution will be the best one.
+
+Other approaches would probably have all the additional details show on click or on hover with either row expansion, small dialog, or even navigation to a details page.
 
 ### Task 7: Logic Feature
 
@@ -107,6 +113,13 @@ To calculate the food an animal needs in kilograms in 1 day, the zookeepers use 
 5. If the animal is a fish: The required food is 0 kg
 
 // Your solution
+
+I created three more helper functions: "nextMonthFoodSupply", "dailyFoodSupply", and "daysInMonth".
+- "nextMonthFoodSupply" more or less multiplies the output of both other functions
+- "dailyFoodSupply" uses the rules given above to calculate an animal's daily intake
+- "daysInMonth" is actually a function I wrote while problem solving a while ago, just translated the header/prototype to TS
+
+Then I just added yet another table column and called the first function, fixing the return value's precision.
 
 ### Task 8: Plan New Feature
 
