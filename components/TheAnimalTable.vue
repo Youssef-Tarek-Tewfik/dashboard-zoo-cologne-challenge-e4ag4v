@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
   import type { PropType } from 'vue';
   import type { Animal } from '../types';
   import { calculateAgeInYears, compareByProperty } from '../composables/helpers';
@@ -12,11 +12,17 @@
     },
   });
 
-  let sortingColumn = "name";
-  
-  const animalsSortedByName = computed(() =>
-    props.animals.slice().sort((animalA, animalB) => compareByProperty(animalA, animalB, sortingColumn))
-  );
+
+  const columnRef = ref(null);
+  columnRef.value = "name";
+  const animalsSorted = computed({
+    get() {
+      return props.animals.slice().sort((animalA, animalB) => compareByProperty(animalA, animalB, columnRef.value));
+    },
+    set(val) {
+      columnRef.value = val;
+    }
+  });
 
 </script>
 
@@ -24,28 +30,28 @@
   <table class="table-auto">
     <thead>
       <tr>
-        <th>Index</th>
-        <th>Species</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Age (yrs)</th>
-        <th>Weight (kg)</th>
+        <th @click="() => animalsSorted = 'id'">Index</th>
+        <th @click="() => animalsSorted = 'species'">Species</th>
+        <th @click="() => animalsSorted = 'name'">Name</th>
+        <th @click="() => animalsSorted = 'gender'">Gender</th>
+        <th @click="() => animalsSorted = 'birthdate'">Age (yrs)</th>
+        <th @click="() => animalsSorted = 'weight'">Weight (kg)</th>
       </tr>
     </thead>
     <tbody>
       <tr
         v-for="(
-          { id, species, name, gender, birthdate, weight }, animalIndex
-        ) in animalsSortedByName"
+          animal, animalIndex
+        ) in animalsSorted"
         :key="id"
         class="hover:bg-gray-200"
       >
         <td>{{ animalIndex + 1 }}</td>
-        <td>{{ species }}</td>
-        <td>{{ name }}</td>
-        <td>{{ gender }}</td>
-        <td>{{ calculateAgeInYears(new Date(birthdate)) }}</td>
-        <td>{{ weight }}</td>
+        <td>{{ animal.species }}</td>
+        <td>{{ animal.name }}</td>
+        <td>{{ animal.gender }}</td>
+        <td>{{ calculateAgeInYears(new Date(animal.birthdate)) }}</td>
+        <td>{{ animal.weight }}</td>
       </tr>
     </tbody>
   </table>
