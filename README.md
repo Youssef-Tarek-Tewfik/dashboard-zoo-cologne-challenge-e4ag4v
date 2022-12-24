@@ -5,12 +5,12 @@ The project is currently a single-page web app written in TypeScript using Vue a
 
 ## Installation
 
-To run: npm run dev
-To build: npm run build
-To start: npm run start
-To lint: npm run lint
-To test: npm run test
-To end: Ctrl + C
+- To run: npm run dev
+- To build: npm run build
+- To start: npm run start
+- To lint: npm run lint
+- To test: npm run test
+- To end: Ctrl + C
 
 ### Prerequisites
 
