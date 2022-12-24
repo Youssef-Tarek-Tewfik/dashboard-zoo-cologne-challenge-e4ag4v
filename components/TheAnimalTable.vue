@@ -46,7 +46,7 @@
       <tr
         v-for="(animal, animalIndex) in animalsSorted"
         :key="id"
-        class="hover:bg-gray-200"
+        class="hover:bg-green-300"
       >
         <td>{{ animalIndex + 1 }}</td>
         <td>{{ animal.species }}</td>

@@ -147,8 +147,19 @@ Don't spend more thatn 15-30 minutes here - planning like this can quickly becom
 
 // Your solution
 
+There are two approaches that come to mind: the first one is creating a new page with a schedule layount with each tile showing an overview of that day's progress, and the second one is to have a to-do list like layout that also allows the user to navigate back and forth to check historical data.
+
+The first approach would suit sparse data; less per day and more over the month, while the second one will pretty much suit any amount of data, as long as the history navigation is designed well.
+
+From here a couple of questions arise: how many entries are expected per day? How far back should the historical data be kept?
+What is the zookeepers' preferred layout?
+
+UI/UX concepts would generally support that entries should not only be auto-generated (using the daily food intake calculator), but also the user should be able to add, edit and delete entries. Yes/no checkboxes might not be sufficient, partial completion or a progress indicator for each entry could be better here.
+
 ### Task 9: Finish the documentation
 
 Revisit docs from step 3, see if you want to add anything. Also think about bonuses. Add a general comment about anything (inside the universe of the challenge or out of it) if you want to.
 
 // Your solution
+
+So I just played around a bit with Tailwind to get more used to it. I can see a lot of potential here but as a developer it really is much easier to let the designers do their thing and just focus on the implementation

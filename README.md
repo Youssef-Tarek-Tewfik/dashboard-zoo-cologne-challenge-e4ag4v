@@ -16,4 +16,9 @@ To end: Ctrl + C
 
 Node.js, Vue3, Nuxt3
 
+## Future Plans
+
+- Improve UI
+- Daily To-do list
+
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/dashboard-zoo-cologne-challenge-e4ag4v)
